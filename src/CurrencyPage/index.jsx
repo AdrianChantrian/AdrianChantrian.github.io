@@ -1,31 +1,28 @@
 import React from 'react';
-import { MemoryRouter, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
-import PaginationItem from '@material-ui/lab/PaginationItem';
+import CardCurrency from '../CardCurrency'
 
-export default function CurrencyPage() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+      marginLeft:180
+    },
+  },
+}));
+
+export default function PaginationControlled() {
+  const classes = useStyles();
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
-    <MemoryRouter initialEntries={['/cards']} initialIndex={0}>
-      <Route>
-        {({ location }) => {
-          const query = new URLSearchParams(location.search);
-          const page = parseInt(query.get('page') || '1', 4);
-          return (
-            <Pagination
-              page={page}
-              count={4}
-              renderItem={(item) => (
-                <PaginationItem
-                  component={Link}
-                  to={`/cards${item.page === 1 ? '' : `?page=${item.page}`}`}
-                  {...item}
-                />
-              )}
-            />
-          );
-        }}
-      </Route>
-    </MemoryRouter>
+    <div className={classes.root}>
+      <CardCurrency page={page}/>
+      <Pagination count={4} page={page} onChange={handleChange} />
+    </div>
   );
 }

@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ListView from '../ListView';
-import CardCurrency from '../CardCurrency';
 import CurrencyPage from '../CurrencyPage';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,7 +68,6 @@ export default function SimpleTabs() {
         <ListView/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CardCurrency/>
         <CurrencyPage/>
       </TabPanel>
     </div>
